@@ -24,3 +24,16 @@ Schedule:
 -Week 2/Milestone 2: See how much total data I can pull from 1 player and pick the -relevant data to present
 -Week 3/Milestone 3: Evaluate if I can pull data from 2 players and then compare them in a relevant way (Stretch Goal)
 -Week 4/Milestone 4: CSS, make everything look better
+
+List of things done so far:
+1. Get Riot Games API key
+2. Created getchampions.py to get list of champions and their respective data but realized that data dragon already does this
+3. Converted list of champions from a string into a json file
+4. Created a champions model
+5. Created a custom management command to load champions.json into the database
+6. Created a vue app to list all champions and their respective images
+7. Currenly figuring out how to best display the top 5 champions that have the highest user-selected statistic
+
+
+8. Information before selection champion: find a way to sort a list of attribute, typical way would be to make a list of list and then sort that list
+9. Information after champion is selected
