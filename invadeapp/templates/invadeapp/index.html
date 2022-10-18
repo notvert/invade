@@ -12,10 +12,11 @@
 <body>
 
     <div id="app">
-        <button v-on:click="getChampion">list all Champions</button>
-        <ul><li v-for="champ in champion"> ${champ.name} ${champ.hp} </li></ul>
-        <!-- <img v-bind:src="champ.image"> -->
+        <button v-on:click="highestHP">highest HP</button>
+        <button v-on:click="clearPage">clear page</button>
+        <ul><li v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </li></ul>
         
+
     </div>
 
 <script>
@@ -25,6 +26,7 @@
         data: {
             champion: [],
             message: "this works!",
+            website: "https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/",
         },
         methods: {
             getChampion: function() {
@@ -37,10 +39,32 @@
                     // console.log(this.champion)
                     })
             },
+            clearPage: function() {
+            
+                this.champion = []
+            
+            },
+
+            highestHP: function() {
+                // this.champion.sort(key=attrgetter("hp"))
+                let hp_list = Object.entries(this.champion)
+                console.log(hp_list[0][1].hp)
+                hp_list.sort(
+                    (a,b) => b[0][1].hp - a[0][1].hp
+                )
+                // for (champ in this.champion) {
+                //     // console.log(this.champion[champ].hp)
+                //     console.log(this.champion[champ].name + " " + this.champion[champ].hp)
+                // }
+    
+                // console.log(this.champion.armor)
+                // console.log(this.champion[0].hp)
+        
+            },
         },
 
         created: function() {
-            console.log(this.message)
+            this.getChampion()
         }
   })
 </script>
