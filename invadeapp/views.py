@@ -13,3 +13,14 @@ def champions(request):
     champion = list(Champions.objects.all().values())
     return JsonResponse(champion,
         safe=False, status=status.HTTP_200_OK)
+
+def sortByHp(request):
+    champions_sorted = list(Champions.objects.all().order_by('-hp').values())
+    return JsonResponse(champions_sorted,
+        safe=False, status=status.HTTP_200_OK)
+
+def sortByAttribute(request, attribute):
+    attribute = request.args.get('attribute')
+    champions_sorted = list(Champions.objects.all().order_by(attribute).values())
+    return JsonResponse(champions_sorted,
+        safe=False, status=status.HTTP_200_OK)

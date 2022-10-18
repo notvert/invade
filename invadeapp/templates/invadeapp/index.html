@@ -12,11 +12,20 @@
 <body>
 
     <div id="app">
-        <button v-on:click="highestHP">highest HP</button>
+        <button v-on:click="getHp">highest HP</button>
         <button v-on:click="clearPage">clear page</button>
-        <ul><li v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </li></ul>
-        
 
+        <form method="post" name="sortByAttribute" id="sortByAttribute">{% csrf_token %}
+        <select name="attribute" id="attribute">
+            <option value="hp">HP</option>
+            <option value="mp">MP</option>
+            <option value="crit">CRIT</option>
+            <option value="attackdamage">ATTACK DMG</option>
+        </select>
+        <button>submit</button>
+        </form>
+
+        <ul><li v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </li></ul>
     </div>
 
 <script>
@@ -25,7 +34,6 @@
         delimiters: ['${','}'],
         data: {
             champion: [],
-            message: "this works!",
             website: "https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/",
         },
         methods: {
@@ -44,32 +52,41 @@
                 this.champion = []
             
             },
-
-            highestHP: function() {
-                // this.champion.sort(key=attrgetter("hp"))
-                let hp_list = Object.entries(this.champion)
-                console.log(hp_list[0][1].hp)
-                hp_list.sort(
-                    (a,b) => b[0][1].hp - a[0][1].hp
-                )
-                // for (champ in this.champion) {
-                //     // console.log(this.champion[champ].hp)
-                //     console.log(this.champion[champ].name + " " + this.champion[champ].hp)
-                // }
-    
-                // console.log(this.champion.armor)
-                // console.log(this.champion[0].hp)
-        
+            getHp: function() {
+                axios({
+                    method: 'get',
+                    url: `/champions_hp/`
+                }).then((response) => {
+                    this.champion = response.data
+                    // console.log(this.champion)
+                    })
+            },
+            switchSelect: function(event) {
+                this.selected = event.target.value
+                console.log(this.selected)
             },
         },
-
         created: function() {
             this.getChampion()
-        }
-  })
+        },
+})
 </script>
 
+<!-- // highestHP: function() {
+    //     // this.champion.sort(key=attrgetter("hp"))
+    //     let hp_list = Object.entries(this.champion)
+    //     console.log(hp_list[0][1].hp)
+    //     hp_list.sort(
+    //         (a,b) => b[0][1].hp - a[0][1].hp
+    //     )
+        // for (champ in this.champion) {
+        //     // console.log(this.champion[champ].hp)
+        //     console.log(this.champion[champ].name + " " + this.champion[champ].hp)
+        // }
 
-
+        // console.log(this.champion.armor)
+        // console.log(this.champion[0].hp)  
+    @change="switchSelect($event)" -->
 </body>
 </html>
+
