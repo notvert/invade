@@ -11,21 +11,24 @@
 </head>
 <body>
 
+    <br>
     <div id="app">
-        <button v-on:click="getHp">highest HP</button>
-        <button v-on:click="clearPage">clear page</button>
-
-        <form method="post" name="sortByAttribute" id="sortByAttribute">{% csrf_token %}
-        <select name="attribute" id="attribute">
+        <!-- <button v-on:click="getHp">highest HP</button> -->
+        <!-- <form method="post" name="sortByAttribute" id="sortByAttribute">{% csrf_token %} -->
+        <select name="attribute" id="attribute" @change="switchSelect($event)">
             <option value="hp">HP</option>
             <option value="mp">MP</option>
             <option value="crit">CRIT</option>
             <option value="attackdamage">ATTACK DMG</option>
         </select>
-        <button>submit</button>
-        </form>
+        <button v-on:click="sortBy">Sort By</button>
+        <br><button v-on:click="clearPage">clear page</button>
+        <!-- </form> -->
+        <!-- https://vuejs.org/guide/essentials/conditional.html#v-else-if -->
+        <!-- <p v-if="selected" v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> ${champ.hp} </p> -->
 
-        <ul><li v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </li></ul>
+        <p v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </p>
+        <!-- <ul><li v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </li></ul> -->
     </div>
 
 <script>
@@ -35,6 +38,7 @@
         data: {
             champion: [],
             website: "https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/",
+            selected: this.selected,
         },
         methods: {
             getChampion: function() {
@@ -52,19 +56,29 @@
                 this.champion = []
             
             },
-            getHp: function() {
+            // getHp: function() {
+            //     axios({
+            //         method: 'get',
+            //         url: `/champions_hp/`
+            //     }).then((response) => {
+            //         this.champion = response.data
+            //         // console.log(this.champion)
+            //         })
+            // },
+            switchSelect: function(event) {
+                this.selected = event.target.value
+                console.log(this.selected)
+                // console.log(this.champion[this.selected])
+            },
+            sortBy: function() {
                 axios({
                     method: 'get',
-                    url: `/champions_hp/`
+                    url: `/champions_`+this.selected
                 }).then((response) => {
                     this.champion = response.data
                     // console.log(this.champion)
                     })
-            },
-            switchSelect: function(event) {
-                this.selected = event.target.value
-                console.log(this.selected)
-            },
+            },            
         },
         created: function() {
             this.getChampion()
