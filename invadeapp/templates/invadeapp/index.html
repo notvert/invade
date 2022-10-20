@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +7,26 @@
     <title>Invade App</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        export default {
+          data() {
+            return {
+              selected: ''
+            }
+          }
+        }
+    </script>
 </head>
 <body>
 
     <br>
+
     <div id="app">
         <!-- <button v-on:click="getHp">highest HP</button> -->
         <!-- <form method="post" name="sortByAttribute" id="sortByAttribute">{% csrf_token %} -->
-        <select name="attribute" id="attribute" @change="switchSelect($event)">
+
+        <select v-model="selected" name="selected" :id="selected">
+            <option disabled value ="">Please select one</option>
             <option value="hp">HP</option>
             <option value="mp">MP</option>
             <option value="crit">CRIT</option>
@@ -26,8 +37,8 @@
         <!-- </form> -->
         <!-- https://vuejs.org/guide/essentials/conditional.html#v-else-if -->
         <!-- <p v-if="selected" v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> ${champ.hp} </p> -->
-
-        <p v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </p>
+        
+        <p v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> hp: ${champ.hp} mp: ${champ.mp} crit: ${champ.crit} attack: ${champ.attackdamage} </p>
         <!-- <ul><li v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </li></ul> -->
     </div>
 
@@ -38,7 +49,7 @@
         data: {
             champion: [],
             website: "https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/",
-            selected: this.selected,
+            selected: '',
         },
         methods: {
             getChampion: function() {
@@ -65,11 +76,11 @@
             //         // console.log(this.champion)
             //         })
             // },
-            switchSelect: function(event) {
-                this.selected = event.target.value
-                console.log(this.selected)
-                // console.log(this.champion[this.selected])
-            },
+            // switchSelect: function(event) {
+            //     this.selected = event.target.value
+            //     console.log(this.selected)
+            //     // console.log(this.champion[this.selected])
+            // },
             sortBy: function() {
                 axios({
                     method: 'get',
@@ -78,6 +89,8 @@
                     this.champion = response.data
                     // console.log(this.champion)
                     })
+            //     console.log('champ'+'.'+this.selected)
+            // let rough = console.log('champ'+'.'+this.selected)
             },            
         },
         created: function() {
