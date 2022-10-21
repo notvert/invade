@@ -5,17 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invade App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-        export default {
-          data() {
-            return {
-              selected: ''
-            }
-          }
-        }
-    </script>
 </head>
 <body>
 
@@ -29,8 +21,8 @@
             <option disabled value ="">Please select one</option>
             <option value="hp">HP</option>
             <option value="mp">MP</option>
-            <option value="crit">CRIT</option>
             <option value="attackdamage">ATTACK DMG</option>
+            <option value="attackspeed">ATTACK SPEED</option>
         </select>
         <button v-on:click="sortBy">Sort By</button>
         <br><button v-on:click="clearPage">clear page</button>
@@ -38,7 +30,18 @@
         <!-- https://vuejs.org/guide/essentials/conditional.html#v-else-if -->
         <!-- <p v-if="selected" v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> ${champ.hp} </p> -->
         
-        <p v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> hp: ${champ.hp} mp: ${champ.mp} crit: ${champ.crit} attack: ${champ.attackdamage} </p>
+        <!-- <p v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> hp: ${champ.hp} mp: ${champ.mp} attack dmg: ${champ.attackdamage} attack speed: ${champ.attackspeed} </p> -->
+        
+        <div v-for="champ in champion" class="card" style="width: 18rem;">
+            <img class="card-img-top" v-bind:src="website+champ.image" style="width: 9rem;">
+            <div class="card-body">
+              <p class="card-text">hp: ${champ.hp}</p>
+              <p class="card-text">mp: ${champ.mp}</p>
+              <p class="card-text">attack dmg: ${champ.attackdamage}</p>
+              <p class="card-text">attack speed: ${champ.attackspeed}</p>  
+            </div>
+        </div>
+        
         <!-- <ul><li v-for="champ in champion"> ${champ.name} <img v-bind:src="website+champ.image"> </li></ul> -->
     </div>
 
@@ -50,13 +53,14 @@
             champion: [],
             website: "https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/",
             selected: '',
+            // options: ['hp', 'crit']
         },
         methods: {
             getChampion: function() {
 
                 axios({
                     method: 'get',
-                    url: `/champions/`
+                    url: `/api/champions/`
                 }).then((response) => {
                     this.champion = response.data
                     // console.log(this.champion)
@@ -67,15 +71,7 @@
                 this.champion = []
             
             },
-            // getHp: function() {
-            //     axios({
-            //         method: 'get',
-            //         url: `/champions_hp/`
-            //     }).then((response) => {
-            //         this.champion = response.data
-            //         // console.log(this.champion)
-            //         })
-            // },
+
             // switchSelect: function(event) {
             //     this.selected = event.target.value
             //     console.log(this.selected)
@@ -84,13 +80,12 @@
             sortBy: function() {
                 axios({
                     method: 'get',
-                    url: `/champions_`+this.selected
+                    url: `/api/champions/?ordering=-`+this.selected
                 }).then((response) => {
                     this.champion = response.data
                     // console.log(this.champion)
                     })
-            //     console.log('champ'+'.'+this.selected)
-            // let rough = console.log('champ'+'.'+this.selected)
+
             },            
         },
         created: function() {
@@ -98,22 +93,7 @@
         },
 })
 </script>
-
-<!-- // highestHP: function() {
-    //     // this.champion.sort(key=attrgetter("hp"))
-    //     let hp_list = Object.entries(this.champion)
-    //     console.log(hp_list[0][1].hp)
-    //     hp_list.sort(
-    //         (a,b) => b[0][1].hp - a[0][1].hp
-    //     )
-        // for (champ in this.champion) {
-        //     // console.log(this.champion[champ].hp)
-        //     console.log(this.champion[champ].name + " " + this.champion[champ].hp)
-        // }
-
-        // console.log(this.champion.armor)
-        // console.log(this.champion[0].hp)  
-    @change="switchSelect($event)" -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
 
