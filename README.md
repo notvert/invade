@@ -32,8 +32,5 @@ List of things done so far:
 4. Created a champions model
 5. Created a custom management command to load champions.json into the database
 6. Created a vue app to list all champions and their respective images
-7. Currenly figuring out how to best display the top 5 champions that have the highest user-selected statistic
-
-
-8. Information before selection champion: find a way to sort a list of attribute, typical way would be to make a list of list and then sort that list
-9. Information after champion is selected
+7. Created views for four key stats and display the top 10 champions per stat
+8. Created an API to replace previous hard-coded data view; couldn't get top 10 list to work now

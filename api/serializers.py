@@ -3,5 +3,35 @@ from invadeapp.models import Champions
 
 class ChampionSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('number', 'name', 'height', 'weight', 'image_front', 'image_back', 'type_info', 'id')
+        fields = (
+            'key', 
+            'name', 
+            'attack',  
+            'defense', 
+            'magic',
+            'difficulty', 
+            'hp', 
+            'hpperlevel', 
+            'mp', 
+            'mpperlevel', 
+            'movespeed', 
+            'armor', 
+            'armorperlevel', 
+            'spellblock', 
+            'spellblockperlevel',
+            'attackrange', 
+            'hpregen', 
+            'hpregenperlevel', 
+            'mpregen', 
+            'mpregenperlevel',
+            'crit', 
+            'critperlevel', 
+            'attackdamage', 
+            'attackdamageperlevel', 
+            'attackspeedperlevel', 
+            'attackspeed', 
+            'image'
+        )
         model = Champions
+
+
