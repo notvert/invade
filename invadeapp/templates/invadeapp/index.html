@@ -85,11 +85,23 @@
             
             },
 
-            // switchSelect: function(event) {
-            //     this.selected = event.target.value
-            //     console.log(this.selected)
-            //     // console.log(this.champion[this.selected])
-            // },
+            getId: function() {
+                x = input('Enter your summoner name:')
+                api_key = 'RGAPI-64e1bebd-4568-46f6-a182-81e92d150d4c'
+                watcher = LolWatcher(api_key)
+                my_region = 'na1'
+                me = watcher.summoner.by_name(my_region, x)
+                console.log(me)      
+                axios({
+                    method: 'get',
+                    url: `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/`+ me
+                }).then((response) => {
+                    this.me = response.data
+                    // console.log(this.champion)
+                    })
+                
+            },
+
             sortBy: function() {
                 axios({
                     method: 'get',

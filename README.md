@@ -34,3 +34,6 @@ List of things done so far:
 6. Created a vue app to list all champions and their respective images
 7. Created views for four key stats and display the top 10 champions per stat
 8. Created an API to replace previous hard-coded data view; couldn't get top 10 list to work now
+9. For live game data pull, need to get encrypted ID via https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"input summoner name"
+10. Get live game data via https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/"input ID"
+
