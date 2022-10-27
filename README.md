@@ -20,10 +20,10 @@ I envision that some key findings will be from lots of historical data on one us
 
 Schedule:
 
--Week 1/Milestone 1: Get index.html working with match history for 1 player (5 games)
--Week 2/Milestone 2: See how much total data I can pull from 1 player and pick the -relevant data to present
--Week 3/Milestone 3: Evaluate if I can pull data from 2 players and then compare them in a relevant way (Stretch Goal)
--Week 4/Milestone 4: CSS, make everything look better
+-Week 1/Milestone 1: Get champion information from the Riot Games API as a .json file, load it into my database, display data
+-Week 2/Milestone 2: Create an API to access champion data because Milestone 1 treated the data as an object
+-Week 3/Milestone 3: CSS, make everything look better 
+-Week 4/Milestone 4: Get live data from a live game, which requires getting an encrypted ID and then getting live stats from that ID  (Stretch Goal)
 
 List of things done so far:
 1. Get Riot Games API key

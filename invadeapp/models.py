@@ -31,3 +31,7 @@ class Champions(models.Model):
 
     def __str__(self):
         return self.name
+
+class PlayerRecord(models.Model):
+    summoner_name = models.CharField(max_length=100)
+    eid = models.CharField(max_length=200)
