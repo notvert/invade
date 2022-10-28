@@ -31,3 +31,19 @@ class Champions(models.Model):
 
     def __str__(self):
         return self.name
+
+class PlayerRecord(models.Model):
+    summoner_name = models.CharField(max_length=100)
+    eid = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.summoner_name
+
+class MatchData(models.Model):
+    game_id = models.CharField(max_length=100, null=True, blank=True)
+    map_id = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.game_id
+
+
