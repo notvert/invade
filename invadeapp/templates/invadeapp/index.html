@@ -65,14 +65,13 @@
             <form action="{% url 'invadeapp:savename' %}" method="post">
                 {% csrf_token %}
             <label for="summonerName" class="form-label">Summoner name:</label>
-            <input type="text" class="form-control" id="summonerName" placeholder="" value="" required>
-            <button v-on:click="getId" type="submit" class="btn btn-primary btn-lg px-4 me-sm-3">Scout</button>
+            <input type="text" class="form-control" name="summonerName" placeholder="" value="" required>
+            <button type="submit" class="btn btn-primary btn-lg px-4 me-sm-3">Scout</button>
             </form>
             <a href="#home"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Home</button></a>
           </div>
         </div>
     </div>
-
 
 </div>
 
@@ -102,8 +101,8 @@
             
             },
 
-            getId: function() {
-                console.log(summonerName)
+            // getId: function() {
+            //     console.log(summonerName)
                 // x = input('Enter your summoner name:')
                 // api_key = 'RGAPI-b4a6034f-2670-4359-99f0-23a20722a4f5'
                 // watcher = LolWatcher(api_key)
@@ -118,7 +117,7 @@
                 //     // console.log(this.champion)
                 //     })
                 
-            },
+            // },
 
             sortBy: function() {
                 axios({
