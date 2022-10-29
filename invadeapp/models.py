@@ -42,8 +42,11 @@ class PlayerRecord(models.Model):
 class MatchData(models.Model):
     game_id = models.CharField(max_length=100, null=True, blank=True)
     map_id = models.IntegerField(null=True, blank=True)
+    champion_Id = models.CharField(max_length=100, null=True, blank=True)
+    summoner_Name = models.CharField(max_length=100, null=True, blank=True)
 
-    def __str__(self):
-        return self.game_id
+class AllData(models.Model):
+    alldata = models.CharField(max_length=100000000, null=True, blank=True)
+
 
 
