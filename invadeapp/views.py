@@ -18,7 +18,7 @@ def savename(request): # a view for receiving a form submission
     # print(request.POST) # verify we received the form data
     summoner_name = request.POST['summonerName'] # get the value the user entered
     # print(summoner_name)
-    key = "RGAPI-b9cbeec8-e5da-44e7-8d4c-17dde8508af5"
+    key = "RGAPI-9223e927-91a1-48e2-b21b-112a9c72f9f4"
     url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summoner_name + "?api_key=" + key
     payload = ""
     headers = {
@@ -28,22 +28,31 @@ def savename(request): # a view for receiving a form submission
     id = json.loads(response.text)
     eid = id["id"]
     # print(eid)
+    playerrecord = PlayerRecord(summoner_name=summoner_name, eid=eid) # create an instance of our model
+    playerrecord.save() # save a new row to the database
     url2 = "https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" + eid + "?api_key=" + key
     payload2 = ""
     headers2 = {
     }
     response2 = requests.request("GET", url2, headers=headers2, data=payload2)
-    # print(response2.text)
+    print(response2.text)
     transform = json.loads(response2.text)
-    game_id = transform["gameId"]
-    map_id = transform["mapId"]
-    # print(game_id)
-    print(game_id)
-    matchrecord = MatchData(game_id=game_id, map_id=map_id)
-    matchrecord.save()
-    # https://docs.djangoproject.com/en/4.1/ref/models/querysets/ if the summoner name exists, don't add it again
-    playerrecord = PlayerRecord(summoner_name=summoner_name, eid=eid) # create an instance of our model
-    playerrecord.save() # save a new row to the database
+    print(transform)
+    # print(transform["gameId"])
+
+    try:
+        # print("Connection successful")
+        game_id = transform["gameId"]
+        map_id = transform["mapId"]
+        print(game_id)
+        with open("sample.json","w") as player: 
+            json.dump(transform,player)
+
+        # matchrecord = MatchData(game_id=game_id, map_id=map_id)
+        # matchrecord.save()
+    except KeyError: 
+        print("Player offline")
+
     return redirect("/")
 
 

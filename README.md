@@ -30,10 +30,13 @@ List of things done so far:
 2. Created getchampions.py to get list of champions and their respective data but realized that data dragon already does this
 3. Converted list of champions from a string into a json file
 4. Created a champions model
-5. Created a custom management command to load champions.json into the database
+5. Created a management command to load champions.json into the database
 6. Created a vue app to list all champions and their respective images
 7. Created views for four key stats and display the top 10 champions per stat
 8. Created an API to replace previous hard-coded data view; couldn't get top 10 list to work now
 9. For live game data pull, need to get encrypted ID via https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"input summoner name"
 10. Get live game data via https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/"input ID"
+11. Create a new view to execute steps 9/10 and to have exception handling, save file to sample.json
+12. Create a management command to load match data (sample.json) into the database (need to figure out how to automate, chron job?)
+13. How to pull all champions from model?
 
