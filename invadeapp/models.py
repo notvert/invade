@@ -40,14 +40,14 @@ class PlayerRecord(models.Model):
         return self.summoner_name
 
 class MatchData(models.Model):
-    summonerName = models.CharField(max_length=100, null=True, blank=True)
+    summoner_name_match = models.CharField(max_length=100, null=True, blank=True)
     team_id = models.CharField(max_length=10, null=True, blank=True)
     champion_id = models.CharField(max_length=100, null=True, blank=True)
     spell1_id = models.CharField(max_length=4, null=True, blank=True)
     spell2_id  = models.CharField(max_length=4, null=True, blank=True)
 
     def __str__(self):
-        return self.summonerName
+        return self.summoner_name_match
 
 
 

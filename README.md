@@ -37,6 +37,7 @@ List of things done so far:
 9. For live game data pull, need to get encrypted ID via https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"input summoner name"
 10. Get live game data via https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/"input ID"
 11. Create a new view to execute steps 9/10 and to have exception handling, save file to sample.json
-12. Create a management command to load match data (sample.json) into the database (need to figure out how to automate, chron job?)
-13. How to pull all champions from model?
+12. Create a management command to load match data (sample.json) into the database
+13. Load match data directly from views.py 
+14. How to pull all champions from model?
 
