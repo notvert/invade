@@ -39,5 +39,5 @@ List of things done so far:
 11. Create a new view to execute steps 9/10 and to have exception handling, save file to sample.json
 12. Create a management command to load match data (sample.json) into the database
 13. Load match data directly from views.py 
-14. How to pull all champions from model?
+14. Added new endpoint to API for match data
 
