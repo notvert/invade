@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from invadeapp.models import Champions
+from invadeapp.models import Champions, MatchData
 
 class ChampionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,4 +34,13 @@ class ChampionSerializer(serializers.ModelSerializer):
         )
         model = Champions
 
-
+class MatchDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'summoner_name_match',
+            'team_id', 
+            'champion_id', 
+            'spell1_id',
+            'spell2_id'
+        )
+        model = MatchData

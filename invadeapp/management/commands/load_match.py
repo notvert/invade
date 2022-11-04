@@ -13,15 +13,15 @@ class Command(BaseCommand):
         # print(match_data["participants"][0]["championId"])
 
         for match in match_data["participants"]:
-            # print(match["summonerName"])
-            summonerName_ext = match["summonerName"]
+            print(match["summonerName"])
+            summoner_name_ext = match["summonerName"]
             champion_id_ext = match["championId"]
             team_id_ext = match["teamId"]
             spell1Id_ext = match["spell1Id"]
             spell2Id_ext = match["spell2Id"]
 
             MatchData.objects.create(
-                summonerName = summonerName_ext,
+                summoner_name_match = summoner_name_ext,
                 team_id = team_id_ext,
                 champion_id = champion_id_ext,
                 spell1_id = spell1Id_ext,

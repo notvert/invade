@@ -66,10 +66,25 @@
                 {% csrf_token %}
             <label for="summonerName" class="form-label">Summoner name:</label>
             <input type="text" class="form-control" name="summonerName" placeholder="" value="" required>
-            <button type="submit" class="btn btn-primary btn-lg px-4 me-sm-3">Scout</button>
+            <button type="submit" class="btn btn-primary btn-lg px-4 me-sm-3">Input Name</button>
             </form>
+            <br><br>
+            <button v-on:click="getMatch" type="button" class="btn btn-primary btn-lg px-4 gap-3">Scout</button>
+            <button v-on:click="clearPage" type="button" class="btn btn-outline-secondary btn-lg px-4">Clear Page</button>
             <a href="#home"><button type="button" class="btn btn-outline-secondary btn-lg px-4">Home</button></a>
-          </div>
+        </div>
+
+            <div v-for="summoner in match" class="card" style="width: 18rem;">
+                <!-- <img class="card-img-top" v-bind:src="website+champ.image" style="width: 9rem;"> -->
+                <div class="card-body">
+                  <p class="card-text">${summoner.summoner_name_match}</p>
+                  <p class="card-text">champion: ${summoner.champion_id}</p>
+                  <!-- <p class="card-text">mp: ${champ.mp}</p>
+                  <p class="card-text">attack dmg: ${champ.attackdamage}</p>
+                  <p class="card-text">attack speed: ${champ.attackspeed}</p>   -->
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -83,6 +98,7 @@
             champion: [],
             website: "https://ddragon.leagueoflegends.com/cdn/12.19.1/img/champion/",
             selected: '',
+            match: [],
         },
         methods: {
             getChampion: function() {
@@ -95,9 +111,21 @@
                     // console.log(this.champion)
                     })
             },
+            getMatch: function() {
+
+                axios({
+                    method: 'get',
+                    url: `/api/match`
+                }).then((response) => {
+                    this.match = response.data
+                    console.log(this.match)
+                    })
+            },
+
             clearPage: function() {
             
                 this.champion = []
+                this.match = []
             
             },
 
