@@ -19,7 +19,7 @@ def savename(request): # a view for receiving a form submission
     # print(request.POST) # verify we received the form data
     summoner_name = request.POST['summonerName'] # get the value the user entered
     # print(summoner_name)
-    key = "RGAPI-d86f6e63-2461-4265-9655-9f1eaea9c3bf"
+    key = "RGAPI-f9f99b6a-db56-4689-a639-438b3c189c37"
     url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + summoner_name + "?api_key=" + key
     payload = ""
     headers = {

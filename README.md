@@ -40,4 +40,6 @@ List of things done so far:
 12. Create a management command to load match data (sample.json) into the database
 13. Load match data directly from views.py 
 14. Added new endpoint to API for match data
+15. Display other player names with Scout button
+16. Calculated if the user should invade or not based on if his/her team's total hp is greater than the enemy team's total hp
 
